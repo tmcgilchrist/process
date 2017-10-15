@@ -24,9 +24,13 @@ Cli
 -----
 
 ``` shell
-process --send-for <k> \
-        --wait-for <l> \
-        --with-seed <seed>
+process node --port <port> \
+             --host <hostname> \
+             --send-for <k> \
+             --wait-for <l> \
+             --with-seed <seed>
+
+
 ```
 
 Cluster configuration
@@ -42,6 +46,9 @@ this file in README.
 Building
 -----
 
+This was developed with GHC 8.0.2 to prevent issues with package versions I'd recommend using the
+same version.
+
 ``` shell
 # Builds the project
 ./mafia build
@@ -53,3 +60,13 @@ Building
 
 This project uses `mafia` which is a thin wrapper around a cabal sandbox workflow. It should also
 build with regular cabal ideally with sandboxes. See [mafia](https://github.com/ambiata/mafia)
+
+Running
+-----
+
+``` shell
+# Spawn a new node
+./dist/build/Process/process --host <host> --port <port> \
+                             --send-for 10 --wait-for 10 \
+                             --with-seed 10
+```

@@ -13,7 +13,21 @@ description:           process-message
 library
   build-depends:
                        base                            >= 3          && < 5
+                     , binary                          == 0.8.*
+                     , containers                      == 0.5.*
+                     , clock                           == 0.7.*
                      , distributed-process             == 0.7.*
+                     , either                          == 4.4.*
+                     , network                         >= 2.6.2      && < 2.7
+                     , network-transport               == 0.4.*
+                     , network-transport-tcp           == 0.5.*
+                     , text                            == 1.2.*
+                     , random                          == 1.1.*
+                     , time                            >= 1.4        && < 1.7
+
+                     -- Typically I'd have ranges here rather than such strict versions
+                     -- for now I'm locking this down to prevent issues.
+
   ghc-options:
                        -Wall
 
@@ -22,20 +36,20 @@ library
 
   exposed-modules:
                        Process
+                     , Process.Data
+                     , Process.Logging
+                     , Process.Time
+                     , Process.Sender
 
 executable process
-  main-is:             process.hs
+  main-is:             process-cli.hs
   build-depends:       base                            >= 3          && < 5
                      , process-message
-                     , distributed-process             == 0.7.*
-                     , network-transport-tcp           == 0.6.*
                      , optparse-applicative            >= 0.11       && < 0.15
+                     , text                            == 1.2.*
 
   hs-source-dirs:      main
   ghc-options:         -Wall
-
-                     
-        
 
 test-suite test
   type:                exitcode-stdio-1.0
@@ -51,3 +65,7 @@ test-suite test
                        base                            >= 3          && < 5
                      , process-message
                      , hedgehog                        == 0.5.*
+                     , network
+                     , distributed-process
+                     , network-transport
+                     , network-transport-tcp
