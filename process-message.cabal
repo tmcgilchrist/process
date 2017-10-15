@@ -1,0 +1,53 @@
+name:                  process-message
+version:               0.0.1
+license:               BSD3
+author:                Tim McGilchrist <timmcgil@gmail.com>
+maintainer:            Tim McGilchrist <timmcgil@gmail.com>
+copyright:             (c) 2017 Tim McGilchrist.
+synopsis:              process-message
+category:              System
+cabal-version:         >= 1.8
+build-type:            Simple
+description:           process-message
+
+library
+  build-depends:
+                       base                            >= 3          && < 5
+                     , distributed-process             == 0.7.*
+  ghc-options:
+                       -Wall
+
+  hs-source-dirs:
+                       src
+
+  exposed-modules:
+                       Process
+
+executable process
+  main-is:             process.hs
+  build-depends:       base                            >= 3          && < 5
+                     , process-message
+                     , distributed-process             == 0.7.*
+                     , network-transport-tcp           == 0.6.*
+                     , optparse-applicative            >= 0.11       && < 0.15
+
+  hs-source-dirs:      main
+  ghc-options:         -Wall
+
+                     
+        
+
+test-suite test
+  type:                exitcode-stdio-1.0
+
+  main-is:             test.hs
+
+  ghc-options:         -Wall -threaded -O2
+
+  hs-source-dirs:
+                       test
+
+  build-depends:
+                       base                            >= 3          && < 5
+                     , process-message
+                     , hedgehog                        == 0.5.*
